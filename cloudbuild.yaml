@@ -1,0 +1,68 @@
+timeout: '3600s'
+
+options:
+  machineType: 'N1_HIGHCPU_8'
+  diskSizeGb: 100
+
+steps:
+  - id: 'pi-gen-builder'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - './build.sh'
+    env:
+      - '_GCP_PROJECT=${PROJECT_ID}'
+      - '_IOT_REGISTRY=${_NAMESPACE}'
+      - '_DEVICE_ID=${_DEVICE_ID}'
+      - '_TARGET_HOSTNAME=${_TARGET_HOSTNAME}'
+      - '_WPA_ESSID=${_WPA_ESSID}'
+      - '_WPA_PASSWORD=${_WPA_PASSWORD}'
+      - '_WPA_COUNTRY=${_WPA_COUNTRY}'
+      - '_ENABLE_SSH=${_ENABLE_SSH}'
+      - '_FIRST_USER_NAME=${_FIRST_USER_NAME}'
+      - '_FIRST_USER_PASS=${_FIRST_USER_PASS}'
+      - '_RSA_PRIVATE=${_RSA_PRIVATE}'
+      - '_RSA_PUBLIC=${_RSA_PUBLIC}'
+
+artifacts:
+  objects:
+    location: 'gs://${_NAMESPACE}.teknoir.cloud/downloads/$_DEVICE_ID/image'
+    paths: ['pi-gen/deploy/image_raspberry-pi-teknoir.zip']
+
+#  - id: 'upload-image'
+#    name: gcr.io/cloud-builders/gsutil
+#    volumes:
+#      - name: 'images'
+#        path: '/persistent_volume'
+#    args: ['cp', 'gs://mybucket/results.zip', '/persistent_volume/image_raspberry-pi-teknoir.zip']
+
+#
+#steps:
+#  - name: gcr.io/cloud-builders/gsutil
+#    args: ['cp', 'gs://mybucket/results.zip', 'previous_results.zip']
+#
+#
+#steps:
+#  - name: 'ubuntu'
+#    volumes:
+#      - name: 'vol1'
+#        path: '/persistent_volume'
+#    entrypoint: 'bash'
+#    args:
+#      - '-c'
+#      - |
+#        echo "Hello, world!" > /persistent_volume/file
+#  - name: 'ubuntu'
+#    volumes:
+#      - name: 'vol1'
+#        path: '/persistent_volume'
+#    args: ['cat', '/persistent_volume/file']
+#
+#steps:
+#  - name: 'gcr.io/cloud-builders/go'
+#    args: ['build', 'my-package']
+#artifacts:
+#  objects:
+#    location: 'gs://mybucket/'
+#    paths: ['my-package']

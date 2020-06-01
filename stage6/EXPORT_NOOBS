@@ -1,0 +1,2 @@
+NOOBS_NAME="Raspbian Teknoir"
+NOOBS_DESCRIPTION="A port of Debian with docker, k3s and the toe"
