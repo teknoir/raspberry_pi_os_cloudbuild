@@ -13,7 +13,7 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'cd /persistent_volume && gcloud source repos clone github_teknoir_raspberry_pi_os_cloudbuild --project=teknoir'
+      - 'cd /persistent_volume && rm -rf github_teknoir_raspberry_pi_os_cloudbuild || true && gcloud source repos clone github_teknoir_raspberry_pi_os_cloudbuild --project=teknoir'
 
   - id: 'pi-gen-builder'
     name: 'gcr.io/cloud-builders/docker'
