@@ -1,2 +1,2 @@
-NOOBS_NAME="Raspbian Teknoir"
-NOOBS_DESCRIPTION="A port of Debian with docker, k3s and the toe"
+NOOBS_NAME="Teknoir RPi OS"
+NOOBS_DESCRIPTION="A port of Debian with docker, k3s, toe and the devstudio"

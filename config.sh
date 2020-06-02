@@ -1,6 +1,6 @@
 #IMG_NAME required (Default: unset)
 #The name of the image to build with the current stage directories. Setting IMG_NAME=Raspbian is logical for an unmodified RPi-Distro/pi-gen build, but you should use something else for a customized version. Export files in stages may add suffixes to IMG_NAME.
-IMG_NAME=Raspbian
+IMG_NAME="Teknoir RPi OS"
 
 #RELEASE (Default: buster)
 #The release version to build images against. Valid values are jessie, stretch buster, bullseye, and testing.
@@ -66,8 +66,9 @@ TIMEZONE_DEFAULT=Etc/UTC
 STAGE_LIST="stage0 stage1 stage2 stage6"
 
 # TEKNOIR ADDED CONFIG #
+# The rest of the variables are set dynamically from build script.
 
 #IMG_FILENAME (Default: $date-$IMG_NAME)
-IMG_FILENAME="${IMG_FILENAME:-"image_raspberry-pi"}"
+IMG_FILENAME="image"
 #ZIP_FILENAME (Default: image_$date-$IMG_NAME)
-ZIP_FILENAME="${ZIP_FILENAME:-"image_raspberry-pi"}"
+ZIP_FILENAME="image"
