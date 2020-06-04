@@ -48,7 +48,7 @@ steps:
 artifacts:
   objects:
     location: 'gs://${_NAMESPACE}.teknoir.cloud/downloads/$_DEVICE_ID'
-    paths: ['/pi-gen/deploy/image.zip']
+    paths: ['pi-gen/deploy/image.zip']
 
 #  - id: 'upload-image'
 #    name: gcr.io/cloud-builders/gsutil
