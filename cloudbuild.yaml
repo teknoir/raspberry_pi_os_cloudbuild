@@ -5,25 +5,25 @@ options:
   diskSizeGb: 100
 
 steps:
-  - id: 'clone-git-repo'
-    name: 'gcr.io/cloud-builders/gcloud'
-    volumes:
-      - name: 'images'
-        path: '/persistent_volume'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - 'cd /persistent_volume && rm -rf github_teknoir_raspberry_pi_os_cloudbuild || true && gcloud source repos clone github_teknoir_raspberry_pi_os_cloudbuild --project=teknoir'
+#  - id: 'clone-git-repo'
+#    name: 'gcr.io/cloud-builders/gcloud'
+#    volumes:
+#      - name: 'images'
+#        path: '/persistent_volume'
+#    entrypoint: 'bash'
+#    args:
+#      - '-c'
+#      - 'cd /persistent_volume && rm -rf github_teknoir_raspberry_pi_os_cloudbuild || true && gcloud source repos clone github_teknoir_raspberry_pi_os_cloudbuild --project=teknoir'
 
   - id: 'pi-gen-builder'
     name: 'gcr.io/cloud-builders/docker'
-    volumes:
-      - name: 'images'
-        path: '/persistent_volume'
+#    volumes:
+#      - name: 'images'
+#        path: '/persistent_volume'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'cd /persistent_volume/github_teknoir_raspberry_pi_os_cloudbuild && ./build.sh'
+      - './build.sh'
     env:
       - '_GCP_PROJECT=${PROJECT_ID}'
       - '_IOT_REGISTRY=${_NAMESPACE}'
@@ -38,17 +38,17 @@ steps:
       - '_RSA_PRIVATE=${_RSA_PRIVATE}'
       - '_RSA_PUBLIC=${_RSA_PUBLIC}'
 
-  - id: 'copy-new-image-to-cloud-storage'
-    name: 'gcr.io/cloud-builders/gsutil'
-    volumes:
-      - name: 'images'
-        path: '/persistent_volume'
-    args: ['cp', '/persistent_volume/github_teknoir_raspberry_pi_os_cloudbuild/pi-gen/deploy/image.zip', 'gs://${_NAMESPACE}.teknoir.cloud/downloads/${_DEVICE_ID}/image']
+#  - id: 'copy-new-image-to-cloud-storage'
+#    name: 'gcr.io/cloud-builders/gsutil'
+#    volumes:
+#      - name: 'images'
+#        path: '/persistent_volume'
+#    args: ['cp', '/persistent_volume/github_teknoir_raspberry_pi_os_cloudbuild/pi-gen/deploy/image.zip', 'gs://${_NAMESPACE}.teknoir.cloud/downloads/${_DEVICE_ID}/image.zip']
 
-#artifacts:
-#  objects:
-#    location: 'gs://${_NAMESPACE}.teknoir.cloud/downloads/$_DEVICE_ID/image'
-#    paths: ['/persistent_volume/github_teknoir_raspberry_pi_os_cloudbuild/pi-gen/deploy/image_raspberry-pi-teknoir.zip']
+artifacts:
+  objects:
+    location: 'gs://${_NAMESPACE}.teknoir.cloud/downloads/$_DEVICE_ID'
+    paths: ['/pi-gen/deploy/image.zip']
 
 #  - id: 'upload-image'
 #    name: gcr.io/cloud-builders/gsutil
