@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hmq
+  name: mqtt
   namespace: kube-system
 spec:
   selector:
-    app: hmq
+    app: mqtt
   ports:
     - protocol: TCP
       port: 1883
@@ -16,21 +16,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hmq
+  name: mqtt
   namespace: kube-system
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hmq
+      app: mqtt
   template:
     metadata:
       labels:
-        app: hmq
+        app: mqtt
     spec:
       containers:
-        - name: toe
-          image: tekn0ir/hmq:latest
+        - name: mqtt
+          image: eclipse-mosquitto:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 1883
