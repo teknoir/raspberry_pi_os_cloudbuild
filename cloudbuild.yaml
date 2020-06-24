@@ -47,7 +47,7 @@ steps:
 
 artifacts:
   objects:
-    location: 'gs://${_NAMESPACE}.teknoir.cloud/downloads/$_DEVICE_ID'
+    location: 'gs://${_NAMESPACE}.${_DOMAIN}/downloads/$_DEVICE_ID'
     paths: ['pi-gen/deploy/image.zip']
 
 #  - id: 'upload-image'
