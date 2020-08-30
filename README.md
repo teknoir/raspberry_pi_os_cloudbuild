@@ -33,3 +33,8 @@ https://github.com/sgielen/picl-k3os-image-generator
 
 
 xorriso
+
+
+
+
+pi: add "cgroup_memory=1 cgroup_enable=memory" to /boot/cmdline.txt
