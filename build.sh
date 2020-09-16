@@ -22,12 +22,12 @@ echo "${_RSA_PUBLIC}" > pi-gen/stage6/04-install-toe-and-devstudio/files/rsa_pub
 cat toe-deployment.yaml | sed "s/{DEVICE_ID}/${_DEVICE_ID}/g" | sed "s/{GCP_PROJECT}/${_GCP_PROJECT}/g" | sed "s/{IOT_REGISTRY}/${_IOT_REGISTRY}/g" | cat - > pi-gen/stage6/04-install-toe-and-devstudio/files/toe-deployment.yaml
 
 echo "TARGET_HOSTNAME=${_TARGET_HOSTNAME}" >> pi-gen/config
-echo "WPA_ESSID=${_WPA_ESSID}" >> pi-gen/config
-echo "WPA_PASSWORD=${_WPA_PASSWORD}" >> pi-gen/config
+echo "WPA_ESSID=\"${_WPA_ESSID}\"" >> pi-gen/config
+echo "WPA_PASSWORD=\"${_WPA_PASSWORD}\"" >> pi-gen/config
 echo "WPA_COUNTRY=${_WPA_COUNTRY}" >> pi-gen/config
 echo "ENABLE_SSH=${_ENABLE_SSH}" >> pi-gen/config
 echo "FIRST_USER_NAME=${_FIRST_USER_NAME}" >> pi-gen/config
-echo "FIRST_USER_PASS=${_FIRST_USER_PASS}" >> pi-gen/config
+echo "FIRST_USER_PASS=\"${_FIRST_USER_PASS}\"" >> pi-gen/config
 
 pushd pi-gen
 ./build-docker.sh
