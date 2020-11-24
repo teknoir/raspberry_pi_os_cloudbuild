@@ -5,84 +5,38 @@ options:
   diskSizeGb: 100
 
 steps:
-#  - id: 'clone-git-repo'
-#    name: 'gcr.io/cloud-builders/gcloud'
-#    volumes:
-#      - name: 'images'
-#        path: '/persistent_volume'
-#    entrypoint: 'bash'
-#    args:
-#      - '-c'
-#      - 'cd /persistent_volume && rm -rf github_teknoir_raspberry_pi_os_cloudbuild || true && gcloud source repos clone github_teknoir_raspberry_pi_os_cloudbuild --project=teknoir'
-
   - id: 'pi-gen-builder'
     name: 'gcr.io/cloud-builders/docker'
-#    volumes:
-#      - name: 'images'
-#        path: '/persistent_volume'
     entrypoint: 'bash'
     args:
       - '-c'
       - './build.sh'
     env:
       - '_GCP_PROJECT=${PROJECT_ID}'
-      - '_IOT_REGISTRY=${_NAMESPACE}'
+      - '_IOT_REGISTRY=${_IOT_REGISTRY}'
       - '_DEVICE_ID=${_DEVICE_ID}'
       - '_TARGET_HOSTNAME=${_TARGET_HOSTNAME}'
-      - '_WPA_ESSID=${_WPA_ESSID}'
-      - '_WPA_PASSWORD=${_WPA_PASSWORD}'
-      - '_WPA_COUNTRY=${_WPA_COUNTRY}'
+      - '_DOMAIN=${DOMAIN}'
+      - '_WIFI_MODE=${_WIFI_MODE}'
+      - '_WIFI_ESSID=${_WIFI_ESSID}'
+      - '_WIFI_PASSWORD=${_WIFI_PASSWORD}'
+      - '_WIFI_COUNTRY=${_WIFI_COUNTRY}'
+      - '_WIFI_IP=${_WIFI_IP}'
+      - '_WIFI_SUBNET=${_WIFI_SUBNET}'
       - '_ENABLE_SSH=${_ENABLE_SSH}'
+      - '_USER_MODE=${_USER_MODE}'
       - '_FIRST_USER_NAME=${_FIRST_USER_NAME}'
       - '_FIRST_USER_PASS=${_FIRST_USER_PASS}'
+      - '_FIRST_USER_KEY=${_FIRST_USER_KEY}'
       - '_RSA_PRIVATE=${_RSA_PRIVATE}'
       - '_RSA_PUBLIC=${_RSA_PUBLIC}'
-
-#  - id: 'copy-new-image-to-cloud-storage'
-#    name: 'gcr.io/cloud-builders/gsutil'
-#    volumes:
-#      - name: 'images'
-#        path: '/persistent_volume'
-#    args: ['cp', '/persistent_volume/github_teknoir_raspberry_pi_os_cloudbuild/pi-gen/deploy/image.zip', 'gs://${_NAMESPACE}.teknoir.cloud/downloads/${_DEVICE_ID}/image.zip']
+      - '_ETH_MODE=${_ETH_MODE}'
+      - '_ETH_IP=${_ETH_IP}'
+      - '_ETH_SUBNET=${_ETH_SUBNET}'
+      - '_BOARD_REVISION=${_BOARD_REVISION}'
 
 artifacts:
   objects:
-    location: 'gs://${_NAMESPACE}.${_DOMAIN}/downloads/$_DEVICE_ID'
-    paths: ['pi-gen/deploy/image.zip']
-
-#  - id: 'upload-image'
-#    name: gcr.io/cloud-builders/gsutil
-#    volumes:
-#      - name: 'images'
-#        path: '/persistent_volume'
-#    args: ['cp', 'gs://mybucket/results.zip', '/persistent_volume/image_raspberry-pi-teknoir.zip']
-
-#
-#steps:
-#  - name: gcr.io/cloud-builders/gsutil
-#    args: ['cp', 'gs://mybucket/results.zip', 'previous_results.zip']
-#
-#
-#steps:
-#  - name: 'ubuntu'
-#    volumes:
-#      - name: 'vol1'
-#        path: '/persistent_volume'
-#    entrypoint: 'bash'
-#    args:
-#      - '-c'
-#      - |
-#        echo "Hello, world!" > /persistent_volume/file
-#  - name: 'ubuntu'
-#    volumes:
-#      - name: 'vol1'
-#        path: '/persistent_volume'
-#    args: ['cat', '/persistent_volume/file']
-#
-#steps:
-#  - name: 'gcr.io/cloud-builders/go'
-#    args: ['build', 'my-package']
-#artifacts:
-#  objects:
-#    location: 'gs://mybucket/'
-#    paths: ['my-package']
+    location: 'gs://${_IOT_REGISTRY}.${_DOMAIN}/downloads/${_DEVICE_ID}'
+    paths:
+      - 'pi-gen/deploy/${_DEVICE_ID}.zip'

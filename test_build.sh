@@ -57,15 +57,31 @@ EOF
 )"
 export _RSA_PUBLIC="${_RSA_PUBLIC:-"${RSA_PUB}"}"
 
-export _GCP_PROJECT=teknoir
-export _IOT_REGISTRY=anders
-export _DEVICE_ID=raspberrypi4
-export _TARGET_HOSTNAME=raspberrypi4
-export _WPA_ESSID=silverapple
-export _WPA_PASSWORD=Y34rz3r0
-export _WPA_COUNTRY=SE
-export _ENABLE_SSH=1
-export _FIRST_USER_NAME=teknoir
-export _FIRST_USER_PASS=raspberry
+export _GCP_PROJECT=teknoir-poc
+export _IOT_REGISTRY=kubeflow-anders-aslund
+export _DEVICE_ID=raspberrypi-test
+export _TARGET_HOSTNAME=raspberrypi-test
+export _DOMAIN=teknoir.info
 
+export _ENABLE_SSH=1
+export _USER_MODE=key
+export _FIRST_USER_NAME=pi
+export _FIRST_USER_PASS=Raspberry4
+export _FIRST_USER_KEY="$(cat <<-EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/ikIyRvHAYwlpL6qtm5EhsB1muesqX29F101c335CZIMWmZXvVd38eucXZUnlLQcVxv/t3MSnuCQvbP1o51DFprv+rakUrsaafs0aa5Smujt43167D0K9VY/0GiOJU4qmWjN3o6qXSkdYdSr1FvgSn7FycUeRtBmhhUU4Y9rPHIILZQ32kx+NEGnWZfnB3HdGPgldHztTLHJ71WyVKRq5v/W9gF2FkKZhXT9XKh79OGpNFzlDc2OrSors54spyQPnBbGGkd1g/16QZSOZ13eZS5g3wGWUApFX4GNZgE84ZllXWRO9EMkJRUE7gTOyvQWvUFHK0WszxTvrwyTNLn2r teknoir-anders-aslund
+EOF
+)"
+
+export _ETH_MODE=dhcp
+export _ETH_IP=192.168.6.1
+export _ETH_SUBNET=24
+
+export _WIFI_MODE=ap
+export _WIFI_ESSID=teknoirwifi6
+export _WIFI_PASSWORD=Y34rz3r0
+export _WIFI_COUNTRY=SE
+export _WIFI_IP=192.168.7.1
+export _WIFI_SUBNET=24
+
+#export CONTINUE=1
 ./build.sh
