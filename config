@@ -68,14 +68,3 @@ STAGE_LIST="stage0 stage1 stage2 stage6"
 # TEKNOIR ADDED CONFIG #
 # The rest of the variables are set dynamically from build script.
 
-#IMG_FILENAME (Default: $date-$IMG_NAME)
-IMG_FILENAME="image"
-#ZIP_FILENAME (Default: image_$date-$IMG_NAME)
-ZIP_FILENAME="image"
-TARGET_HOSTNAME=raspberrypi4
-WPA_ESSID="silverapple"
-WPA_PASSWORD="Y34rz3r0"
-WPA_COUNTRY=SE
-ENABLE_SSH=1
-FIRST_USER_NAME=teknoir
-FIRST_USER_PASS="raspberry"

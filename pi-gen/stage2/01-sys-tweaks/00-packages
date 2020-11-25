@@ -33,7 +33,6 @@ cmake
 dnsutils
 iotop
 kmod
-linux-firmware
 rpi-eeprom
 raspinfo
 python3-dev

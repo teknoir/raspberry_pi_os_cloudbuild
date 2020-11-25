@@ -4,7 +4,7 @@
 cp config ./pi-gen/config
 
 [[ -z "$_RSA_PRIVATE" ]] && { echo "Error: _RSA_PRIVATE not found set"; exit 1; }
-echo "${_RSA_PRIVATE}" > pi-gen/stage3/04-install-toe-and-devstudio/files/rsa_private.pem
+echo "${_RSA_PRIVATE}" > pi-gen/stage6/04-install-toe-and-devstudio/files/rsa_private.pem
 chmod 600 pi-gen/stage6/04-install-toe-and-devstudio/files/rsa_private.pem
 openssl rsa -in pi-gen/stage6/04-install-toe-and-devstudio/files/rsa_private.pem -out pi-gen/stage2/01-sys-tweaks/files/id_rsa
 
