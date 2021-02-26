@@ -16,7 +16,7 @@ steps:
       - '_IOT_REGISTRY=${_IOT_REGISTRY}'
       - '_DEVICE_ID=${_DEVICE_ID}'
       - '_TARGET_HOSTNAME=${_TARGET_HOSTNAME}'
-      - '_DOMAIN=${DOMAIN}'
+      - '_DOMAIN=${_DOMAIN}'
       - '_WIFI_MODE=${_WIFI_MODE}'
       - '_WIFI_ESSID=${_WIFI_ESSID}'
       - '_WIFI_PASSWORD=${_WIFI_PASSWORD}'
